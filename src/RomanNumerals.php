@@ -29,8 +29,9 @@ class RomanNumerals
         $nearest = $this->nearest($number);
         $difference = $number - $nearest;
 
-        if ($difference < 0)
+        if ($difference < 0) {
             return $this->toRoman(abs($difference)) . $arabicToRomanMap[$nearest];
+        }
 
         return $arabicToRomanMap[$nearest] . $this->toRoman($difference);
     }
