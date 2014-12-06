@@ -22,16 +22,16 @@ class RomanNumerals
         if (isset($arabicToRomanMap[$number]))
             return $arabicToRomanMap[$number];
 
-        $roman = '';
-        /* for ($i = 0; $i < $number; $i++) */
-        /*     $arabic .= 'I'; */
         $nearest = $this->nearest($number);
-        $roman = $arabicToRomanMap[$nearest] . $this->toRoman($number-$nearest);
+        $difference = $number - $nearest;
 
-        return $roman;
+        if ($difference < 0)
+            return $this->toRoman(abs($difference)) . $arabicToRomanMap[$nearest];
+
+        return $arabicToRomanMap[$nearest] . $this->toRoman($difference);
     }
 
-    public function nearest($number)
+    private function nearest($number)
     {
         $arabicToRomanMap = array_keys($this->arabicToRomanMap());
 
