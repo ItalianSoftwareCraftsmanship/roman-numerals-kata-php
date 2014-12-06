@@ -1,34 +1,8 @@
 <?php
 
-class RomanNumerals
-{
-    private function arabicToRomanMap()
-    {
-        return [
-            1 => 'I',
-            5 => 'V',
-            10 => 'X',
-        ];
-    }
-
-    public function toRoman($number)
-    {
-        if (!$this->inBoundaries($number))
-            throw new Exception();
-
-        $arabicToRomanMap = $this->arabicToRomanMap();
-
-        return $arabicToRomanMap[$number];
-    }
-
-    private function inBoundaries($number)
-    {
-        return $number ==! 0 && $number < 3000;
-    }
-
-}
-
 class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
+
+    private $romanNumerals;
 
     public function setUp()
     {
@@ -39,6 +13,9 @@ class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
     {
         return [
             ['I', 1],
+            ['II', 2],
+            ['III', 3],
+            //['IV', 4],
             ['V', 5],
             ['X', 10],
         ];
