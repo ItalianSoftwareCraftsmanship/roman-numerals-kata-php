@@ -22,11 +22,30 @@ class RomanNumerals
         if (isset($arabicToRomanMap[$number]))
             return $arabicToRomanMap[$number];
 
+        $arabicMapNumbers = array_keys($arabicToRomanMap);
+
         $arabic = '';
         for ($i = 0; $i < $number; $i++)
             $arabic .= 'I';
 
         return $arabic;
+    }
+
+    public function nearest($number)
+    {
+        $arabicToRomanMap = array_keys($this->arabicToRomanMap());
+
+        $nearest = 1000;
+        foreach ($arabicToRomanMap as $mapElement) {
+            $currentDistance = abs($number - $mapElement);
+
+            if ($currentDistance < $nearest) {
+                $nearest = $currentDistance;
+                $min = $mapElement;
+            }
+        }
+
+        return $min;
     }
 
     private function inBoundaries($number)

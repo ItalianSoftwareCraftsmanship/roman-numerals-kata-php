@@ -29,6 +29,11 @@ class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expectedRomanNumber, $this->romanNumerals->toRoman($arabicNumber));
     }
 
+    public function testCanFindNearest()
+    {
+        $this->assertEquals(5, $this->romanNumerals->nearest(4));
+    }
+
     /**
      * @expectedException Exception
      */
