@@ -9,6 +9,10 @@ class RomanNumerals
             1 => 'I',
             5 => 'V',
             10 => 'X',
+            50 => 'L',
+            100 => 'C',
+            500 => 'D',
+            1000 => 'M'
         ];
     }
 
@@ -35,11 +39,11 @@ class RomanNumerals
     {
         $arabicToRomanMap = array_keys($this->arabicToRomanMap());
 
-        $nearest = 1000;
+        $nearest = null;
         foreach ($arabicToRomanMap as $mapElement) {
             $currentDistance = abs($number - $mapElement);
 
-            if ($currentDistance < $nearest) {
+            if ($nearest === null || $currentDistance < $nearest) {
                 $nearest = $currentDistance;
                 $min = $mapElement;
             }

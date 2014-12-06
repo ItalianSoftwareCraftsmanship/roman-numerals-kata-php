@@ -17,7 +17,17 @@ class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
             ['III', 3],
             ['IV', 4],
             ['V', 5],
+            ['IX', 9],
             ['X', 10],
+            ['XII', 12],
+            ['XIV', 14],
+            ['L', 50],
+            ['LV', 55],
+            ['C', 100],
+            ['CXXIX', 129],
+            ['D', 500],
+            ['M', 1000],
+            //['DCCLXXXII', 782]
         ];
     }
 
