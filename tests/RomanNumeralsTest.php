@@ -1,42 +1,24 @@
 <?php
 
-class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
-
-    /**
-     * @expectedException Exception
-     */
-    public function test_that_zero_is_not_handled()
+class RomanNumerals
+{
+    private function arabicToRomanMap()
     {
-        $this->toRoman(0);
+        return [
+            1 => 'I',
+            5 => 'V',
+            10 => 'X',
+        ];
     }
 
-    /**
-     * @expectedException Exception
-     */
-    public function test_that_over_3000_is_not_handled()
-    {
-        $this->toRoman(3001);
-    }
-
-    public function test_that_can_translate_one()
-    {
-        $this->assertToRomanNumber('I', 1);
-    }
-
-    public function test_that_can_translate_five()
-    {
-        $this->assertToRomanNumber('V', 5);
-    }
-
-    private function toRoman($number)
+    public function toRoman($number)
     {
         if (!$this->inBoundaries($number))
             throw new Exception();
 
-        if ($number === 1)
-            return 'I';
+        $arabicToRomanMap = $this->arabicToRomanMap();
 
-        return 'V';
+        return $arabicToRomanMap[$number];
     }
 
     private function inBoundaries($number)
@@ -44,9 +26,46 @@ class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
         return $number ==! 0 && $number < 3000;
     }
 
-    private function assertToRomanNumber($expectedRomanNumber, $arabicNumber)
+}
+
+class RomanNumeralsTest extends PHPUnit_Framework_TestCase {
+
+    public function setUp()
     {
-        $this->assertEquals($expectedRomanNumber, $this->toRoman($arabicNumber));
+        $this->romanNumerals = new RomanNumerals();
+    }
+
+    public function romanProvider()
+    {
+        return [
+            ['I', 1],
+            ['V', 5],
+            ['X', 10],
+        ];
+    }
+
+    /**
+     * @dataProvider romanProvider
+     */
+    public function testRomanNumbers($expectedRomanNumber, $arabicNumber)
+    {
+        $this->assertEquals($expectedRomanNumber, $this->romanNumerals->toRoman($arabicNumber));
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function test_that_zero_is_not_handled()
+    {
+        $this->romanNumerals->toRoman(0);
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function test_that_over_3000_is_not_handled()
+    {
+        $this->romanNumerals->toRoman(3000);
     }
 
 } 
