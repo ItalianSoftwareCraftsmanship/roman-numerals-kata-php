@@ -1,0 +1,9 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {"psr-0": {"": "src"}}
+}
